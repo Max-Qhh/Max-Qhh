@@ -44,7 +44,7 @@ kubectl plugin list
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 ```
 
-## 3.1.安装插件及使用
+### 3.1.安装插件及使用
 ```shell script
 kubectl krew
 kubectl krew list
