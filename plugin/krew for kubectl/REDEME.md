@@ -27,7 +27,7 @@ kubectl explain [RESOURCE] 查看资源的定义
 krew 是一个用来管理 kubectl 插件的工具，类似于 apt 或 yum，支持搜索、安装和管理kubectl 插件。
 
 
-## 安装kubectl krew
+## 三、安装kubectl krew
 ```shell script
 #https://github.com/kubernetes-sigs/krew/releases/
 
@@ -44,21 +44,55 @@ kubectl plugin list
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 ```
 
-## 安装插件
+## 3.1.安装插件及使用
 ```shell script
 kubectl krew
 kubectl krew list
+kubectl krew version
 kubectl krew update
 kubectl krew search
+
 kubectl krew install   ctx
+kubectl krew info ctx
+kubectl krew upgrade ctx
+
 kubectl krew install   ns
+kubectl krew install   get-all
 kubectl krew install   minio
 kubectl krew install   ingress-nginx
 kubectl krew install   cert-manager
 kubectl krew install   ssh-jump
 ```
 
-## 问题
+### 3.2.常用命令
+```shell script
+#装完插件后可通过命令kubectl 或者kubectl- 使用插件，
+# 比如'kubectl ns weave'和'kubectl-ns default'都可以切换默认表空间
+
+# ns
+kubectl ns namespaces;
+
+# get-all
+#该命令类似'kubectl get all --all-namespaces'，但更全。
+
+# tail
+kubectl-tail
+kubectl-tail --ns default 
+kubectl-tail --rs kubeapps-8fd98f6f5
+kubectl-tail --rs kubeapps/kubeapps-8fd98f6f5 
+#tail为输出pod日志，以上命令分别为：
+# 输出全部pod日志、
+# 输出所有命名空间default的pod日志、
+# 输出全部命名空间中所有replicaset为kubeapps-8fd98f6f5的pod日志、
+# 输出命名空间为kubeapps且replicaset为kubeapps-8fd98f6f5的pod日志。
+
+# 卸载
+kubectl krew uninstall tail
+## rm -rf  /root/.krew 
+
+```
+
+### 3.3.问题
 - 可能存在的问题
   - 网络原因
   ```shell script
